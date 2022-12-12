@@ -66,46 +66,90 @@ class Select:
         self.exit = Button(self.frame_2, text='Выйти', font=(cs.font_1, 16), bd=2, command=self.Exit, cursor="hand2",
                            bg=cs.color_2, fg=cs.color_3).place(x=10, y=670, width=200, height=40)
     def OnSelectedforShowBooks(self, a):
+        self.dlt_record = Button(self.frame_2, text='Delete', font=(cs.font_1, 12), bd=2, command=self.DeleteBook,
+                                 cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=50, y=500, width=100)
         self.update_record = Button(self.frame_2, text='Update', font=(cs.font_1, 12), bd=2,
                                     command=self.UpdateBookDetails, cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(
             x=180, y=500, width=100)
     def OnSelectedforShowBookPlace(self, a):
+        self.dlt_record = Button(self.frame_2, text='Delete', font=(cs.font_1, 12), bd=2, command=self.DeleteBookPlace,
+                                 cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=50, y=500, width=100)
         self.update_record = Button(self.frame_2, text='Update', font=(cs.font_1, 12), bd=2,
                                     command=self.UpdateBookPlace, cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(
             x=180, y=500, width=100)
     def OnSelectedforShowAdministrators(self, a):
+        self.dlt_record = Button(self.frame_2, text='Delete', font=(cs.font_1, 12), bd=2, command=self.DeleteAdmin,
+                                 cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=50, y=500, width=100)
         self.update_record = Button(self.frame_2, text='Update', font=(cs.font_1, 12), bd=2,
                                     command=self.UpdateAdmin, cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(
             x=180, y=500, width=100)
     def OnSelectedforShowIssueCard(self, a):
+        self.dlt_record = Button(self.frame_2, text='Delete', font=(cs.font_1, 12), bd=2, command=self.DeleteIssueCard,
+                                 cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=50, y=500, width=100)
         self.update_record = Button(self.frame_2, text='Update', font=(cs.font_1, 12), bd=2,
                                     command=self.UpdateIssueCard, cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(
             x=180, y=500, width=100)
     def OnSelectedforShowBookingCard(self, a):
+        self.dlt_record = Button(self.frame_2, text='Delete', font=(cs.font_1, 12), bd=2, command=self.DeleteBookingCard,
+                                 cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=50, y=500, width=100)
         self.update_record = Button(self.frame_2, text='Update', font=(cs.font_1, 12), bd=2,
                                     command=self.UpdateBookingCard, cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(
             x=180, y=500, width=100)
 
     def OnSelectedforShowReaders(self, a):
+        self.dlt_record = Button(self.frame_2, text='Delete', font=(cs.font_1, 12), bd=2, command=self.DeleteReader,
+                                 cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=50, y=500, width=100)
         self.update_record = Button(self.frame_2, text='Update', font=(cs.font_1, 12), bd=2,
                                     command=self.UpdateReader, cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(
             x=180, y=500, width=100)
 
     def OnSelectedforShowLibrarianRoom(self, a):
+        self.dlt_record = Button(self.frame_2, text='Delete', font=(cs.font_1, 12), bd=2, command=self.DeleteLibrarianRoom,
+                                 cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=50, y=500, width=100)
         self.update_record = Button(self.frame_2, text='Update', font=(cs.font_1, 12), bd=2,
                                     command=self.UpdateLibrarianRoom, cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(
             x=180, y=500, width=100)
 
     def OnSelectedforShowLibrarians(self, a):
+        self.dlt_record = Button(self.frame_2, text='Delete', font=(cs.font_1, 12), bd=2, command=self.DeleteLibrarian,
+                                 cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=50, y=500, width=100)
         self.update_record = Button(self.frame_2, text='Update', font=(cs.font_1, 12), bd=2,
                                     command=self.UpdateLibrarian, cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(
             x=180, y=500, width=100)
 
     def OnSelectedforShowRooms(self, a):
+        self.dlt_record = Button(self.frame_2, text='Delete', font=(cs.font_1, 12), bd=2, command=self.DeleteRoom,
+                                 cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=50, y=500, width=100)
         self.update_record = Button(self.frame_2, text='Update', font=(cs.font_1, 12), bd=2,
                                     command=self.UpdateRoom, cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(
             x=180, y=500, width=100)
 
+    def DeleteBook(self):
+        x = self.tree.selection()
+        row = self.tree.item(x)['values']
+        try:
+            status = messagebox.askokcancel('Delete Book', 'Are you want to proceed?')
+
+            if status == True:
+                connection = pymysql.connect(host=cr.host, user=cr.user, password=cr.password, database=cr.database)
+                curs = connection.cursor()
+
+                curs.execute("select * from books where id=%s", row[0])
+                var = curs.fetchall()
+
+                curs.execute("delete from books where id=%s", (row[0]))
+                messagebox.showinfo("Success!", "The book record has been deleted")
+                connection.commit()
+                connection.close()
+                self.ClearScreen()
+                self.ShowBooks()
+        except Exception as e:
+            messagebox.showerror("Error!", f"Error due to {str(e)}", parent=self.window)
+
+            # Function 5: It gets call from 'Function 1', is used to return a book from the borrower
+
+    # Function 12: It is used get the book name for searching and calls 'Function 17'
+    # when the search button is pressed
     def UpdateBookDetails(self):
         x = self.tree.selection()
         row = self.tree.item(x)['values']
@@ -146,7 +190,8 @@ class Select:
                                   command=partial(self.SubmitforUpdateBook, row), cursor="hand2", bg=cs.color_2,
                                   fg=cs.color_3).place(x=310, y=459, width=100)
 
-
+    # Function 10: It gets call from 'Function 9' when the submit button is pressed.
+    # It updates a entry in the 'book_list' table
     def SubmitforUpdateBook(self, row):
         try:
             connection = pymysql.connect(host=cr.host, user=cr.user, password=cr.password, database=cr.database)
@@ -167,7 +212,32 @@ class Select:
         except Exception as e:
             messagebox.showerror("Error!", f"Error due to {str(e)}", parent=self.window)
 
+    def DeleteRoom(self):
+        x = self.tree.selection()
+        row = self.tree.item(x)['values']
+        try:
+            status = messagebox.askokcancel('Delete Book', 'Are you want to proceed?')
 
+            if status == True:
+                connection = pymysql.connect(host=cr.host, user=cr.user, password=cr.password, database=cr.database)
+                curs = connection.cursor()
+
+                curs.execute("select * from books where id=%s", row[0])
+                var = curs.fetchall()
+
+                curs.execute("delete from books where id=%s", (row[0]))
+                messagebox.showinfo("Success!", "The book record has been deleted")
+                connection.commit()
+                connection.close()
+                self.ClearScreen()
+                self.ShowBooks()
+        except Exception as e:
+            messagebox.showerror("Error!", f"Error due to {str(e)}", parent=self.window)
+
+            # Function 5: It gets call from 'Function 1', is used to return a book from the borrower
+
+    # Function 12: It is used get the book name for searching and calls 'Function 17'
+    # when the search button is pressed
     def UpdateRoom(self):
         x = self.tree.selection()
         row = self.tree.item(x)['values']
@@ -277,6 +347,32 @@ class Select:
         except Exception as e:
             messagebox.showerror("Error!", f"Error due to {str(e)}", parent=self.window)
 
+    def DeleteBookingCard(self):
+        x = self.tree.selection()
+        row = self.tree.item(x)['values']
+        try:
+            status = messagebox.askokcancel('Delete Book', 'Are you want to proceed?')
+
+            if status == True:
+                connection = pymysql.connect(host=cr.host, user=cr.user, password=cr.password, database=cr.database)
+                curs = connection.cursor()
+
+                curs.execute("select * from books where id=%s", row[0])
+                var = curs.fetchall()
+
+                curs.execute("delete from books where id=%s", (row[0]))
+                messagebox.showinfo("Success!", "The book record has been deleted")
+                connection.commit()
+                connection.close()
+                self.ClearScreen()
+                self.ShowBooks()
+        except Exception as e:
+            messagebox.showerror("Error!", f"Error due to {str(e)}", parent=self.window)
+
+            # Function 5: It gets call from 'Function 1', is used to return a book from the borrower
+
+    # Function 12: It is used get the book name for searching and calls 'Function 17'
+    # when the search button is pressed
     def UpdateBookingCard(self):
         x = self.tree.selection()
         row = self.tree.item(x)['values']
@@ -343,6 +439,32 @@ class Select:
         except Exception as e:
             messagebox.showerror("Error!", f"Error due to {str(e)}", parent=self.window)
 
+    def DeleteIssueCard(self):
+        x = self.tree.selection()
+        row = self.tree.item(x)['values']
+        try:
+            status = messagebox.askokcancel('Delete Book', 'Are you want to proceed?')
+
+            if status == True:
+                connection = pymysql.connect(host=cr.host, user=cr.user, password=cr.password, database=cr.database)
+                curs = connection.cursor()
+
+                curs.execute("select * from books where id=%s", row[0])
+                var = curs.fetchall()
+
+                curs.execute("delete from books where id=%s", (row[0]))
+                messagebox.showinfo("Success!", "The book record has been deleted")
+                connection.commit()
+                connection.close()
+                self.ClearScreen()
+                self.ShowBooks()
+        except Exception as e:
+            messagebox.showerror("Error!", f"Error due to {str(e)}", parent=self.window)
+
+            # Function 5: It gets call from 'Function 1', is used to return a book from the borrower
+
+    # Function 12: It is used get the book name for searching and calls 'Function 17'
+    # when the search button is pressed
     def UpdateIssueCard(self):
         x = self.tree.selection()
         row = self.tree.item(x)['values']
@@ -400,7 +522,32 @@ class Select:
         except Exception as e:
             messagebox.showerror("Error!", f"Error due to {str(e)}", parent=self.window)
 
+    def DeleteAdmin(self):
+        x = self.tree.selection()
+        row = self.tree.item(x)['values']
+        try:
+            status = messagebox.askokcancel('Delete Administrator', 'Are you want to proceed?')
 
+            if status == True:
+                connection = pymysql.connect(host=cr.host, user=cr.user, password=cr.password, database=cr.database)
+                curs = connection.cursor()
+
+                curs.execute("select * from administrators where id=%s", row[0])
+                var = curs.fetchall()
+
+                curs.execute("delete from administrators where id=%s", (row[0]))
+                messagebox.showinfo("Success!", "The book record has been deleted")
+                connection.commit()
+                connection.close()
+                self.ClearScreen()
+                self.ShowBooks()
+        except Exception as e:
+            messagebox.showerror("Error!", f"Error due to {str(e)}", parent=self.window)
+
+            # Function 5: It gets call from 'Function 1', is used to return a book from the borrower
+
+    # Function 12: It is used get the book name for searching and calls 'Function 17'
+    # when the search button is pressed
     def UpdateAdmin(self):
         x = self.tree.selection()
         row = self.tree.item(x)['values']
@@ -452,6 +599,32 @@ class Select:
         except Exception as e:
             messagebox.showerror("Error!", f"Error due to {str(e)}", parent=self.window)
 
+    def DeleteBookPlace(self):
+        x = self.tree.selection()
+        row = self.tree.item(x)['values']
+        try:
+            status = messagebox.askokcancel('Delete Book', 'Are you want to proceed?')
+
+            if status == True:
+                connection = pymysql.connect(host=cr.host, user=cr.user, password=cr.password, database=cr.database)
+                curs = connection.cursor()
+
+                curs.execute("select * from books_place where id=%s", row[0])
+                var = curs.fetchall()
+
+                curs.execute("delete from book_places where id=%s", (row[0]))
+                messagebox.showinfo("Success!", "The book record has been deleted")
+                connection.commit()
+                connection.close()
+                self.ClearScreen()
+                self.ShowBooks()
+        except Exception as e:
+            messagebox.showerror("Error!", f"Error due to {str(e)}", parent=self.window)
+
+            # Function 5: It gets call from 'Function 1', is used to return a book from the borrower
+
+    # Function 12: It is used get the book name for searching and calls 'Function 17'
+    # when the search button is pressed
     def UpdateBookPlace(self):
         x = self.tree.selection()
         row = self.tree.item(x)['values']
@@ -505,6 +678,32 @@ class Select:
         except Exception as e:
             messagebox.showerror("Error!", f"Error due to {str(e)}", parent=self.window)
 
+    def DeleteReader(self):
+        x = self.tree.selection()
+        row = self.tree.item(x)['values']
+        try:
+            status = messagebox.askokcancel('Delete readers', 'Are you want to proceed?')
+
+            if status == True:
+                connection = pymysql.connect(host=cr.host, user=cr.user, password=cr.password, database=cr.database)
+                curs = connection.cursor()
+
+                curs.execute("select * from readers where id=%s", row[0])
+                var = curs.fetchall()
+
+                curs.execute("delete from readers where id=%s", (row[0]))
+                messagebox.showinfo("Success!", "The readers record has been deleted")
+                connection.commit()
+                connection.close()
+                self.ClearScreen()
+                self.ShowBooks()
+        except Exception as e:
+            messagebox.showerror("Error!", f"Error due to {str(e)}", parent=self.window)
+
+            # Function 5: It gets call from 'Function 1', is used to return a book from the borrower
+
+    # Function 12: It is used get the book name for searching and calls 'Function 17'
+    # when the search button is pressed
     def UpdateReader(self):
         x = self.tree.selection()
         row = self.tree.item(x)['values']
@@ -572,6 +771,32 @@ class Select:
         except Exception as e:
             messagebox.showerror("Error!", f"Error due to {str(e)}", parent=self.window)
 
+    def DeleteLibrarianRoom(self):
+        x = self.tree.selection()
+        row = self.tree.item(x)['values']
+        try:
+            status = messagebox.askokcancel('Delete librarian_room', 'Are you want to proceed?')
+
+            if status == True:
+                connection = pymysql.connect(host=cr.host, user=cr.user, password=cr.password, database=cr.database)
+                curs = connection.cursor()
+
+                curs.execute("select * from librarian_rooms where id=%s", row[0])
+                var = curs.fetchall()
+
+                curs.execute("delete from librarian_rooms where id=%s", (row[0]))
+                messagebox.showinfo("Success!", "The book record has been deleted")
+                connection.commit()
+                connection.close()
+                self.ClearScreen()
+                self.ShowBooks()
+        except Exception as e:
+            messagebox.showerror("Error!", f"Error due to {str(e)}", parent=self.window)
+
+            # Function 5: It gets call from 'Function 1', is used to return a book from the borrower
+
+    # Function 12: It is used get the book name for searching and calls 'Function 17'
+    # when the search button is pressed
     def UpdateLibrarianRoom(self):
         x = self.tree.selection()
         row = self.tree.item(x)['values']

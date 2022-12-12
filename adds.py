@@ -33,32 +33,32 @@ class Add:
         self.frame_3 = Frame(self.frame_2, bg=cs.color_2)
         self.frame_3.place(x=0, y=300, relwidth=1, relheight=1)
 
-        self.add_book = Button(self.frame_2, text='Add Book', font=(cs.font_1, 12), bd=2, command=self.AddNewBook,
-                           cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=50, y=40, width=100)
+        self.add_book = Button(self.frame_2, text='Добавить книгу', font=(cs.font_1, 16), bd=2, command=self.AddNewBook,
+                           cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=10, y=20, width=400, height=40)
 
-        self.add_librarian_rooms = Button(self.frame_2, text='Add Librarian Rooms', font=(cs.font_1, 12), bd=2, command=self.AddNewLibrarianRooms,
-                               cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=50, y=100, width=200)
+        self.add_librarian_rooms = Button(self.frame_2, text='Добавить работника читального зала', font=(cs.font_1, 16), bd=2, command=self.AddNewLibrarianRooms,
+                               cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=10, y=70, width=400, height=40)
 
-        self.add_rooms = Button(self.frame_2, text='Add Rooms', font=(cs.font_1, 12), bd=2,
+        self.add_rooms = Button(self.frame_2, text='Добавить читальный зал', font=(cs.font_1, 16), bd=2,
                                           command=self.AddNewRoom,
-                                          cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=50, y=160, width=200)
-        self.add_librarian = Button(self.frame_2, text='Add Librarian', font=(cs.font_1, 12), bd=2,
+                                          cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=10, y=120, width=400, height=40)
+        self.add_librarian = Button(self.frame_2, text='Добавить библиотекаря', font=(cs.font_1, 16), bd=2,
                                 command=self.AddNewLibrarian,
-                                cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=50, y=220, width=200)
+                                cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=10, y=170, width=400, height=40)
 
-        self.add_administrators = Button(self.frame_2, text='Add Administrators', font=(cs.font_1, 12), bd=2,
-                                    command=self.AddNewLibrarian,
-                                    cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=50, y=280, width=200)
+        self.add_administrators = Button(self.frame_2, text='Добавить администратора', font=(cs.font_1, 16), bd=2,
+                                    command=self.AddNewAdministrator,
+                                    cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=10, y=220, width=400, height=40)
 
-        self.add_booking_cards = Button(self.frame_2, text='Add Booking Cards', font=(cs.font_1, 12), bd=2,
+        self.add_booking_cards = Button(self.frame_2, text='Добавить карточку выдачи книг', font=(cs.font_1, 16), bd=2,
                                          command=self.AddNewBookingCard,
-                                         cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=50, y=360, width=200)
-        self.add_issue_card = Button(self.frame_2, text='Add Issue Card', font=(cs.font_1, 12), bd=2,
+                                         cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=10, y=270, width=400, height=40)
+        self.add_issue_card = Button(self.frame_2, text='Добавить карточку бронирования', font=(cs.font_1, 16), bd=2,
                                         command=self.AddNewIssueCard,
-                                        cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=50, y=420, width=200)
-        self.add_book_place = Button(self.frame_2, text='Add Book Place', font=(cs.font_1, 12), bd=2,
+                                        cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=10, y=320, width=400, height=40)
+        self.add_book_place = Button(self.frame_2, text='Добавить место хранения книг', font=(cs.font_1, 16), bd=2,
                                      command=self.AddNewBookPlace,
-                                     cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=50, y=420, width=200)
+                                     cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=10, y=370, width=400, height=40)
 
     def AddNewBook(self):
         self.ClearScreen()
@@ -90,7 +90,7 @@ class Add:
         self.isbn_entry = Entry(self.frame_1, bg=cs.color_4, fg=cs.color_3)
         self.isbn_entry.place(x=220, y=410, width=300)
 
-        self.submit_bt_1 = Button(self.frame_1, text='Submit', font=(cs.font_1, 12), bd=2, command=self.Submit,
+        self.submit_bt_1 = Button(self.frame_1, text='Submit', font=(cs.font_1, 12), bd=2, command=self.SubmitBook,
                                   cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=310, y=459, width=100)
 
     def SubmitBook(self):
@@ -220,9 +220,9 @@ class Add:
         self.adm_id_entry = Entry(self.frame_1, bg=cs.color_4, fg=cs.color_3)
         self.adm_id_entry.place(x=220, y=60, width=300)
 
-        booking_cards_id = Label(self.frame_1, text="ID", font=(cs.font_2, 15, "bold"), bg=cs.color_1).place(x=220, y=30)
+        booking_cards_id = Label(self.frame_1, text="Booking_card_ID", font=(cs.font_2, 15, "bold"), bg=cs.color_1).place(x=220, y=100)
         self.booking_cards_id_entry = Entry(self.frame_1, bg=cs.color_4, fg=cs.color_3)
-        self.booking_cards_id_entry.place(x=220, y=60, width=300)
+        self.booking_cards_id_entry.place(x=220, y=130, width=300)
 
         login = Label(self.frame_1, text="Login", font=(cs.font_2, 15, "bold"), bg=cs.color_1).place(x=220, y=170)
         self.adm_login_entry = Entry(self.frame_1, bg=cs.color_4, fg=cs.color_3)
@@ -251,9 +251,9 @@ class Add:
                                          parent=self.window)
                 else:
                     curs.execute(
-                        "insert into administrators (id,login,password) values(%s,%s,%s)",
+                        "insert into administrators (id,booking_cards_id,login,password) values(%s,%s,%s,%s)",
                         (
-                            self.id_entry.get(),
+                            self.adm_id_entry.get(),
                             self.booking_cards_id_entry.get(),
                             self.adm_login_entry.get(),
                             self.password_adm_entry.get(),
@@ -491,12 +491,52 @@ class Add:
         for widget in self.frame_3.winfo_children():
             widget.destroy()
 
-    def reset_fields(self):
+    def reset_fields_books(self):
         self.bookname_entry.delete(0, END)
         self.author_entry.delete(0, END)
         self.publication_year_entry.delete(0, END)
         self.publisher_entry.delete(0, END)
         self.isbn_entry.delete(0, END)
+
+    def reset_fields_admins(self):
+        self.adm_id_entry.delete(0, END)
+        self.booking_cards_id_entry.delete(0, END)
+        self.adm_login_entry.delete(0, END)
+        self.password_adm_entry.delete(0, END)
+
+    def reset_fields_rooms(self):
+        self.room_id_entry.delete(0, END)
+        self.roomname_entry.delete(0, END)
+
+    def reset_fields_librarians(self):
+        self.lib_id_entry.delete(0, END)
+        self.login_lib_entry.delete(0, END)
+        self.password_lib_entry.delete(0, END)
+
+    def reset_fields_book_place(self):
+        self.quantity_entry.delete(0, END)
+        self.shell_number_entry.delete(0, END)
+        self.books_id_place_entry.delete(0, END)
+        self.rooms_id_place_entry.delete(0, END)
+
+    def reset_fields_booking_card(self):
+        self.booking_card_id_entry.delete(0, END)
+        self.time_book_entry.delete(0, END)
+        self.period_book_entry.delete(0, END)
+        self.readers_id_book_entry.delete(0, END)
+        self.librarians_id_book_entry.delete(0, END)
+        self.books_id_book_entry.delete(0, END)
+
+    def reset_fields_issue_card(self):
+        self.issue_card_id_entry.delete(0, END)
+        self.time_issue_entry.delete(0, END)
+        self.period_issue_entry.delete(0, END)
+        self.readers_id_issue_entry.delete(0, END)
+        self.books_id_issue_entry.delete(0, END)
+
+    def reset_fields_librarian_room(self):
+        self.rooms_id_entry.delete(0, END)
+        self.librarians_id_entry.delete(0, END)
 
     '''Exit window'''
 

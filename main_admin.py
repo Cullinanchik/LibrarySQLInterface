@@ -4,6 +4,9 @@ import customs as cs
 from functools import partial
 import pymysql
 import credentials as cr
+from adds import Add
+from finds import Find
+from selects_admin import Select
 
 
 class Management_Admin:
@@ -39,11 +42,11 @@ class Management_Admin:
                             fg="brown4").place(x=230, y=20)
 
         # All the Buttons in the frame 2
-        self.exit = Button(self.frame_2, text='Добавить', font=(cs.font_1, 16), bd=2, command=self.Exit, cursor="hand2",
+        self.add = Button(self.frame_2, text='Добавить', font=(cs.font_1, 16), bd=2, command=self.addTransition, cursor="hand2",
                            bg=cs.color_2, fg=cs.color_3).place(x=10, y=260, width=400, height=70)
-        self.exit = Button(self.frame_2, text='Найти', font=(cs.font_1, 16), bd=2, command=self.Exit, cursor="hand2",
+        self.find = Button(self.frame_2, text='Найти', font=(cs.font_1, 16), bd=2, command=self.findTransition, cursor="hand2",
                            bg=cs.color_2, fg=cs.color_3).place(x=10, y=170, width=400, height=70)
-        self.exit = Button(self.frame_2, text='Показать', font=(cs.font_1, 16), bd=2, command=self.Exit, cursor="hand2",
+        self.select = Button(self.frame_2, text='Показать', font=(cs.font_1, 16), bd=2, command=self.selectTransition, cursor="hand2",
                            bg=cs.color_2, fg=cs.color_3).place(x=10, y=80, width=400, height=70)
         self.exit = Button(self.frame_2, text='Выйти', font=(cs.font_1, 16), bd=2, command=self.Exit, cursor="hand2",
                            bg=cs.color_2, fg=cs.color_3).place(x=10, y=350, width=400, height=70)
@@ -51,22 +54,31 @@ class Management_Admin:
     def Exit(self):
         self.window.destroy()
 
+    def addTransition(self):
+        self.redirect_window_adds()
+
+    def findTransition(self):
+        self.redirect_window_finds()
+
+    def selectTransition(self):
+        self.redirect_window_selects()
+
     def redirect_window_adds(self):
         self.window.destroy()
         root = Tk()
-        obj = Management_Admin(root)
+        obj = Add(root)
         root.mainloop()
 
     def redirect_window_finds(self):
         self.window.destroy()
         root = Tk()
-        obj = Management_Admin(root)
+        obj = Find(root)
         root.mainloop()
 
     def redirect_window_selects(self):
         self.window.destroy()
         root = Tk()
-        obj = Management_Admin(root)
+        obj = Select(root)
         root.mainloop()
 
     # The main function

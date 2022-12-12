@@ -24,4 +24,4 @@ librarian_rooms = ('rooms_id', 'librarians_id')
 
 issue_cards = ('id', 'time', 'period', 'readers_id', 'books_id')
 
-administrators = ('id', 'login', 'password', 'booking_cards_id')
+administrators = ('id', 'booking_cards_id', 'login', 'password')

@@ -33,36 +33,39 @@ class Find:
         self.frame_3 = Frame(self.frame_2, bg=cs.color_2)
         self.frame_3.place(x=0, y=300, relwidth=1, relheight=1)
 
-        self.search_book = Button(self.frame_2, text='Найти книгу', font=(cs.font_1, 10), bd=2,
+        self.search_book = Button(self.frame_2, text='Найти книгу', font=(cs.font_1, 16), bd=2,
                                   command=self.GetBookNametoSearch, cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(
-            x=240, y=40, width=165, height=20)
+            x=10, y=20, width=400, height=40)
         self.search_reader = Button(self.frame_2, text='Найти читателя', font=(cs.font_1, 16), bd=2, command=self.GetReaderNametoSearch,
-                               cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=10, y=20, width=400, height=20)
+                               cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=10, y=70, width=400, height=40)
         self.search_librarian = Button(self.frame_2, text='Найти библиотекаря', font=(cs.font_1, 16), bd=2,
                                command=self.GetLibrariantoSearch,
-                               cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=10, y=110, width=400, height=20)
+                               cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=10, y=120, width=400, height=40)
         self.search_room = Button(self.frame_2, text='Найти читальный зал', font=(cs.font_1, 16), bd=2,
                                command=self.GetRoomtoSearch,
-                               cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=10, y=200, width=400, height=20)
+                               cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=10, y=170, width=400, height=40)
         self.search_bookigng_card = Button(self.frame_2, text='Найти карточку выдачи книг', font=(cs.font_1, 16),
                                            bd=2,  command=self.GetBookingCardSearch,
-                               cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=10, y=290, width=400, height=20)
+                               cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=10, y=220, width=400, height=40)
         self.search_issue_card = Button(self.frame_2, text='Найти карточку бронирования', font=(cs.font_1, 16), bd=2,
                                command=self.GetIssueCardSearch,
-                               cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=10, y=380, width=400, height=20)
+                               cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=10, y=270, width=400, height=40)
         self.search_book_places = Button(self.frame_2, text='Найти место хранения книг', font=(cs.font_1, 16), bd=2,
                                command=self.GetBookPlacestoSearch,
-                               cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=10, y=400, width=200, height=20)
+                               cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=10, y=320, width=400, height=40)
 
         self.search_librarian_rooms = Button(self.frame_2, text='Найти работников читального зала', font=(cs.font_1, 16), bd=2,
                                          command=self.GetLibrarianRoomstoSearch,
-                                         cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=10, y=470, width=400,
-                                                                                             height=20)
+                                         cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=10, y=370, width=400, height=40)
+        self.search_administrator = Button(self.frame_2, text='Найти администратора',
+                                             font=(cs.font_1, 16), bd=2,
+                                             command=self.GetAdminToSearch,
+                                             cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=10, y=420, width=400, height=45)
 
         self.clear = Button(self.frame_2, text='Очистить экран', font=(cs.font_1, 16), bd=2, command=self.ClearScreen,
-                            cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=10, y=560, width=400, height=20)
+                            cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=210, y=480, width=200, height=40)
         self.exit = Button(self.frame_2, text='Выйти', font=(cs.font_1, 16), bd=2, command=self.Exit, cursor="hand2",
-                           bg=cs.color_2, fg=cs.color_3).place(x=10, y=645, width=400, height=20)
+                           bg=cs.color_2, fg=cs.color_3).place(x=10, y=480, width=200, height=40)
 
     def GetBookNametoSearch(self):
         self.ClearScreen()
@@ -143,6 +146,72 @@ class Find:
             for list in rows:
                 self.tree.insert("", 'end', text=(rows.index(list) + 1),
                                  values=(list[0], list[1], list[2], list[3], list[4], list[5]))
+
+
+    def GetAdminToSearch(self):
+        self.ClearScreen()
+        search_book = Label(self.frame_1, text="Найти администратора", font=(cs.font_1, 30, "bold"), bg=cs.color_1).place(x=280, y=50)
+
+        adm_id = Label(self.frame_1, text="Введите ID администратора", font=(cs.font_2, 15, "bold"),
+                          bg=cs.color_1).place(
+            x=220, y=140)
+        self.adm_id_entry = Entry(self.frame_1, bg=cs.color_4, fg=cs.color_3)
+        self.adm_id_entry.place(x=220, y=165, width=300)
+
+        adm_login = Label(self.frame_1, text="Введите логин администратора", font=(cs.font_2, 15, "bold"), bg=cs.color_1).place(
+            x=220, y=230)
+        self.adm_login_entry = Entry(self.frame_1, bg=cs.color_4, fg=cs.color_3)
+        self.adm_login_entry.place(x=220, y=250, width=300)
+
+        booking_card_id_adm = Label(self.frame_1, text="Введите ID карточки выдачи книг", font=(cs.font_2, 15, "bold"),
+                          bg=cs.color_1).place(
+            x=220, y=320)
+        self.booking_card_id_adm_entry = Entry(self.frame_1, bg=cs.color_4, fg=cs.color_3)
+        self.booking_card_id_adm_entry.place(x=220, y=340, width=300)
+
+
+        self.search_bt = Button(self.frame_1, text='Поиск', font=(cs.font_1, 12), bd=2, command=self.SearchAdmin,
+                                cursor="hand2", bg=cs.color_2, fg=cs.color_3).place(x=310, y=400, width=100)
+
+    # Function 17: It gets call from 'Function 12' and search a book by the name
+    def SearchAdmin(self):
+            try:
+                connection = pymysql.connect(host=cr.host, user=cr.user, password=cr.password, database=cr.database)
+                curs = connection.cursor()
+                if self.adm_id_entry.get() != "":
+                    curs.execute("select * from administrators where id like %s", ("%" + self.adm_id_entry.get()))
+                    rows = curs.fetchall()
+                if self.adm_login_entry.get() != "":
+                    curs.execute("select * from administrators where login like %s", ("%" + self.adm_login_entry.get()))
+                    rows = curs.fetchall()
+                if self.booking_card_id_adm_entry.get() != "":
+                    curs.execute("select * from administrators where booking_cards_id like %s", ("%" + self.booking_card_id_adm_entry.get()))
+                    rows = curs.fetchall()
+            except Exception as e:
+                messagebox.showerror("Error!", f"Error due to {str(e)}", parent=self.window)
+
+            # Defining two scrollbars
+            scroll_x = ttk.Scrollbar(self.frame_1, orient=HORIZONTAL)
+            scroll_y = ttk.Scrollbar(self.frame_1, orient=VERTICAL)
+            self.tree = ttk.Treeview(self.frame_1, columns=cs.administrators, height=400, selectmode="extended",
+                                     yscrollcommand=scroll_y.set, xscrollcommand=scroll_x.set)
+            scroll_y.config(command=self.tree.yview)
+            # vertical scrollbar: left side
+            scroll_y.pack(side=LEFT, fill=Y)
+            scroll_x.config(command=self.tree.xview)
+            # Horizontal scrollbar: at bottom
+            scroll_x.pack(side=BOTTOM, fill=X)
+
+            # Table headings
+            self.tree.heading('id', text='Admin ID', anchor=W)
+            self.tree.heading('booking_cards_id', text='booking_cards_id', anchor=W)
+            self.tree.heading('login', text='login', anchor=W)
+            self.tree.heading('password', text='password', anchor=W)
+            self.tree.pack()
+
+            for list in rows:
+                self.tree.insert("", 'end', text=(rows.index(list) + 1),
+                                 values=(list[0], list[1], list[2], list[3]))
 
     def GetReaderNametoSearch(self):
         self.ClearScreen()
